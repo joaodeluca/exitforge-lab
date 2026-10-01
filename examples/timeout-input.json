@@ -1,0 +1,12 @@
+{
+  "traffic": {
+    "error": "timeout"
+  },
+  "revenue": {
+    "status": 200,
+    "json": {
+      "date": "2026-10-01",
+      "revenue_brl": 4800
+    }
+  }
+}

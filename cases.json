@@ -1,0 +1,513 @@
+[
+  {
+    "id": "daily-kpi",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "completed_offline",
+      "items": [
+        {
+          "date": "2026-10-01",
+          "visits": 1200,
+          "report_type": "daily-kpi"
+        },
+        {
+          "date": "2026-10-01",
+          "revenue_brl": 4800,
+          "report_type": "daily-kpi"
+        }
+      ],
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "overwrite-tag-unicode-nested",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "report_type": "old",
+          "nested": {
+            "label": "São Paulo"
+          }
+        }
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "completed_offline",
+      "items": [
+        {
+          "report_type": "daily-kpi",
+          "nested": {
+            "label": "São Paulo"
+          }
+        },
+        {
+          "date": "2026-10-01",
+          "revenue_brl": 4800,
+          "report_type": "daily-kpi"
+        }
+      ],
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "empty-objects",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {}
+      },
+      "revenue": {
+        "status": 200,
+        "json": {}
+      }
+    },
+    "expected": {
+      "status": "completed_offline",
+      "items": [
+        {
+          "report_type": "daily-kpi"
+        },
+        {
+          "report_type": "daily-kpi"
+        }
+      ],
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "traffic-timeout",
+    "input": {
+      "traffic": {
+        "error": "timeout"
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "unknown",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "TIMEOUT"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "traffic-http-503",
+    "input": {
+      "traffic": {
+        "status": 503,
+        "json": {}
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "HTTP_503"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "traffic-http-404",
+    "input": {
+      "traffic": {
+        "status": 404,
+        "json": {}
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "HTTP_404"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "traffic-null",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": null
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "EXPECTED_OBJECT"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "traffic-array",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": []
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "EXPECTED_OBJECT"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "traffic-bad-status",
+    "input": {
+      "traffic": {
+        "status": "200",
+        "json": {}
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "INVALID_STATUS"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "traffic-bad-envelope",
+    "input": {
+      "traffic": [],
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "INVALID_RESPONSE"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "revenue-timeout",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "error": "timeout"
+      }
+    },
+    "expected": {
+      "status": "unknown",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "TIMEOUT"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "revenue-http-503",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "status": 503,
+        "json": {}
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "HTTP_503"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "revenue-http-404",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "status": 404,
+        "json": {}
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "HTTP_404"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "revenue-null",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "status": 200,
+        "json": null
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "EXPECTED_OBJECT"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "revenue-array",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "status": 200,
+        "json": []
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "EXPECTED_OBJECT"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "revenue-bad-status",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "status": "200",
+        "json": {}
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "INVALID_STATUS"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "revenue-bad-envelope",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": []
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "INVALID_RESPONSE"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "missing-traffic",
+    "input": {
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "traffic",
+        "code": "MISSING_SOURCE"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "missing-revenue",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      }
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "revenue",
+        "code": "MISSING_SOURCE"
+      },
+      "network_calls": 0
+    }
+  },
+  {
+    "id": "extra-source",
+    "input": {
+      "traffic": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "visits": 1200
+        }
+      },
+      "revenue": {
+        "status": 200,
+        "json": {
+          "date": "2026-10-01",
+          "revenue_brl": 4800
+        }
+      },
+      "unplanned": {}
+    },
+    "expected": {
+      "status": "failed",
+      "items": [],
+      "error": {
+        "source": "input",
+        "code": "INVALID_INPUT"
+      },
+      "network_calls": 0
+    }
+  }
+]

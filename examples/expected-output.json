@@ -1,0 +1,16 @@
+{
+  "status": "completed_offline",
+  "items": [
+    {
+      "date": "2026-10-01",
+      "visits": 1200,
+      "report_type": "daily-kpi"
+    },
+    {
+      "date": "2026-10-01",
+      "revenue_brl": 4800,
+      "report_type": "daily-kpi"
+    }
+  ],
+  "network_calls": 0
+}
