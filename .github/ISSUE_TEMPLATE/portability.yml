@@ -1,0 +1,42 @@
+name: A public portability case
+description: Describe a reproducible runtime limitation using public or fictional inputs.
+title: "[Portability] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a free technical experiment, not a checkout or service agreement.
+        Use only public or fictional examples. Never paste credentials, customer data, private URLs or exports containing secrets.
+        Individual quotation in any future research publication would require separate permission.
+  - type: input
+    id: source
+    attributes:
+      label: Public source or a description of your fictional example
+    validations:
+      required: true
+  - type: textarea
+    id: limitation
+    attributes:
+      label: What runtime limitation prevents the task today?
+      description: Describe an observed failure or constraint, rather than a requested feature list.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Small input and expected output
+      description: Include error behavior and anything that must remain unchanged. Do not paste executable Code nodes.
+    validations:
+      required: true
+  - type: textarea
+    id: substitute
+    attributes:
+      label: What already solves part of this?
+      description: Existing transpiler, direct agent conversion, native CLI or keeping the original runtime.
+  - type: checkboxes
+    id: public_only
+    attributes:
+      label: Public input
+      options:
+        - label: This example contains no private data or credentials, and I understand the issue is public.
+          required: true
