@@ -1,0 +1,67 @@
+name: Commissioned extraction — scope enquiry
+description: Discuss a concrete need for independent software, without private data or a purchase commitment.
+title: "[Service scope] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Considering a paid extraction rather than simply installing an automation runtime?
+        Initial reference: BRL 1,490, up to eight eligible deterministic nodes, one correction.
+        Scope and delivery time must be agreed. Contracting and settlement are not enabled yet.
+        This form is not an order, agreement, payment request or offer of free custom engineering.
+        AI agents perform the work; João de Luca is the accountable owner.
+        No universal equivalence, customer migration history or full human review is claimed.
+        Issues are PUBLIC. Do not include emails, phone numbers, private URLs, exports, credentials or customer data.
+        Individual quotation in research would require separate permission; this enquiry is optional.
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Current runtime
+      options:
+        - n8n
+        - Make
+        - Zapier
+        - Other — describe without private details
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why must this run independently?
+      description: Describe a concrete runtime constraint and the alternative you use now. Installation or hosting alone is a different service.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Required behavior and public or fictional input/output
+      description: Include errors that must be preserved and approximate step count. Do not paste executable code or a private export.
+    validations:
+      required: true
+  - type: dropdown
+    id: operations
+    attributes:
+      label: Do you need a dashboard, scheduler, durable state or external writes?
+      description: These requirements are outside the current pilot. Keeping the original runtime may be the better option.
+      options:
+        - "No"
+        - Yes — current pilot would not fit
+        - Not determined
+    validations:
+      required: true
+  - type: dropdown
+    id: paid_interest
+    attributes:
+      label: Is this an enquiry about commissioned work?
+      options:
+        - Considering paid execution, subject to scope and a usable contracting channel
+        - Seeking technical feedback only — no paid intent
+    validations:
+      required: true
+  - type: checkboxes
+    id: public_context
+    attributes:
+      label: Public description
+      options:
+        - label: I am authorized to discuss this example publicly and have included no private data or credentials. I understand this is not a purchase commitment.
+          required: true

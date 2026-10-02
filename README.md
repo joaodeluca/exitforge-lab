@@ -1,6 +1,6 @@
 # ExitForge Lab
 
-Free technical sample of a small automation running outside its original editor. Not a universal converter, paid service, or production equivalence claim.
+Free technical sample of a small automation running outside its original editor. Not a universal converter or production equivalence claim. Separate service-scoping enquiries are described below.
 
 The Python sample follows the object append/tag subset of the public [Multi Source Aggregation workflow](https://github.com/c4snipes/n8n-transpiler/blob/b996ed54e992700c837c2ae579a893a2c34ce3f7/examples/content_aggregation/workflow.json). Original upstream authored by c4snipes, commit b996ed54e992700c837c2ae579a893a2c34ce3f7; upstream metadata declares MIT. This repository does not redistribute the upstream source code. No affiliation.
 
@@ -34,3 +34,11 @@ This makes two explicit, read-only public GET requests. The small adapter requir
 - JSON numbers follow host-language limits; this is not a financial calculation or reconciler.
 
 Technical differences can be reported in repository issues using public or fictional examples. Running the sample is not participation in a paid commercial study. No checkout, account creation or payment collection.
+
+## Considering a commissioned extraction?
+
+If you have a concrete reason to move a small workflow out of its current automation runtime, you can [request a scope assessment](https://github.com/joaodeluca/exitforge-lab/issues/new?template=service-enquiry.yml). The proposed pilot is an independent Python program, agreed input/output cases, instructions, explicit behavioral differences, and one correction. Initial reference price: **BRL 1,490 for up to eight eligible deterministic nodes**; price and delivery time depend on the actual scope. AI agents perform the work; João de Luca is the accountable owner. No prior customer migrations or full human review are claimed.
+
+This is a **scoping enquiry, not an available checkout or service agreement**. Contracting and settlement are not enabled yet; no order or payment is requested. The current scope excludes OAuth, external writes, dashboards, schedulers, durable state and long waits. An eight-node count alone does not establish eligibility. The sample is free and remains separate from any future commissioned work.
+
+Describe only the runtime, reason for leaving, required behavior and a public or fictional example. Issues are public: do not include emails, phone numbers, secrets, private exports or customer data. Public scoping creates no obligation to buy and does not authorize individual quotation in research.
